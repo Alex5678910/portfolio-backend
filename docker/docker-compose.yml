@@ -7,9 +7,34 @@ services:
     environment:
       NODE_ENV: production
       PORT: 4545
-      DATABASE_URL: "file:/app/prisma/dev.db"
+      DATABASE_URL: "postgresql://portfolio_user:portfolio_password@postgres:5432/portfolio_db"
     ports:
       - "4545:4545"
+    depends_on:
+      postgres:
+        condition: service_healthy
     volumes:
       - ../prisma:/app/prisma
     restart: unless-stopped
+    # Не используем .env файл
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: portfolio_postgres
+    environment:
+      POSTGRES_USER: portfolio_user
+      POSTGRES_PASSWORD: portfolio_password
+      POSTGRES_DB: portfolio_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U portfolio_user -d portfolio_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
