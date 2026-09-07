@@ -6,6 +6,7 @@
     "build": "tsc",
     "build:seed": "tsc -p tsconfig.seed.json",
     "build:all": "npm run build:seed && npm run build",
+    "vercel-build": "prisma generate && npm run build:all",
     "start": "node dist/main.js",
     "start:dev": "ts-node src/main.ts",
     "start:prod": "node dist/main.js",

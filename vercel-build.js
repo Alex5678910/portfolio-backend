@@ -1,7 +1,9 @@
 const { execSync } = require('child_process');
 
-console.log('🔧 Running Prisma generate...');
+console.log('🔧 Generating Prisma client...');
 execSync('npx prisma generate', { stdio: 'inherit' });
 
 console.log('🏗️ Building project...');
-execSync('npm run build', { stdio: 'inherit' });
+execSync('npm run build:all', { stdio: 'inherit' });
+
+console.log('✅ Build completed!');
