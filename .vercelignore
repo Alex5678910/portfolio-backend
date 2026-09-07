@@ -1,0 +1,10 @@
+docker/
+Dockerfile
+docker-compose.yml
+.dockerignore
+prisma/dev.db
+README.md
+.git
+.gitignore
+.env
+node_modules
