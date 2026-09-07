@@ -1,4 +1,4 @@
-cat > README.md << 'EOF'
+
 # Portfolio Backend API
 
 Цифровая визитка (backend-приложение) с GraphQL API для презентации специалиста.
