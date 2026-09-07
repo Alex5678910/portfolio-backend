@@ -16,7 +16,6 @@ services:
     volumes:
       - ../prisma:/app/prisma
     restart: unless-stopped
-    # Не используем .env файл
 
   postgres:
     image: postgres:15-alpine

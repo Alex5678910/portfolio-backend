@@ -4,21 +4,21 @@ RUN apk add --no-cache openssl
 
 WORKDIR /app
 
-# Копируем prisma и package.json ДО npm install
-COPY prisma ./prisma/
+# Копируем зависимости
 COPY package*.json ./
+COPY prisma ./prisma/
 
-# Устанавливаем зависимости (без postinstall)
-RUN npm install --ignore-scripts
-
-# Генерируем Prisma клиент
+RUN npm install
 RUN npx prisma generate
 
-# Копируем остальной код
+# Копируем ВСЕ исходники (нужны для импортов)
 COPY . .
 
-# Собираем через tsc (если nest build не работает)
-RUN npx tsc
+# Компилируем только main.ts (остальное подтянется автоматически)
+RUN npx tsc src/main.ts --outDir ./dist --module commonjs --target ES2021 --esModuleInterop --experimentalDecorators --emitDecoratorMetadata --skipLibCheck
+
+# Проверяем
+RUN ls -la dist/main.js || echo "ERROR: main.js not created!"
 
 EXPOSE 4545
 
