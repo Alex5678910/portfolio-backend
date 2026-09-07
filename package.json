@@ -1,7 +1,7 @@
 {
   "name": "portfolio-backend",
   "version": "1.0.0",
-  "description": "Digital business card backend",
+  "description": "Digital business card",
   "scripts": {
     "build": "tsc",
     "build:seed": "tsc -p tsconfig.seed.json",

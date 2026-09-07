@@ -194,6 +194,7 @@ main()
     console.error('❌ Seed failed:', e);
     console.error('Stack trace:', e.stack);
 
+
   })
   .finally(async () => {
     await prisma.$disconnect();
